@@ -117,6 +117,7 @@ public class Tetris extends JFrame {
 	 * Creates a new Tetris instance. Sets up the window's properties,
 	 * and adds a controller listener.
 	 */
+    private final HighScoreManager highScores = HighScoreManager.createDefault();
 	private Tetris() {
 		/*
 		 * Set the basic properties of the window.
@@ -417,6 +418,8 @@ public class Tetris extends JFrame {
 		 */
 		if(!board.isValidAndEmpty(currentType, currentCol, currentRow, currentRotation)) {
 			this.isGameOver = true;
+            highScores.add("Player", score);
+            setTitle("Tetris - Game Over! Score: " + score + "  |  Best: " + highScores.getHighScore());
 			logicTimer.setPaused(true);
 		}		
 	}
