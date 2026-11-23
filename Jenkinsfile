@@ -33,13 +33,13 @@ pipeline {
 
         stage('Compile') {
             steps {
-                sh 'mvn -B -ntp compile'
+                sh 'mvn -B -ntp -Dmaven.compiler.source=17 -Dmaven.compiler.target=17 compile'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn -B -ntp test'
+                sh 'mvn -B -ntp -Dmaven.compiler.source=17 -Dmaven.compiler.target=17 test'
             }
             post {
                 always {
@@ -50,7 +50,7 @@ pipeline {
 
         stage('Package') {
             steps {
-                sh 'mvn -B -ntp -DskipTests package'
+                sh 'mvn -B -ntp -Dmaven.compiler.source=17 -Dmaven.compiler.target=17 -DskipTests package'
             }
         }
 
